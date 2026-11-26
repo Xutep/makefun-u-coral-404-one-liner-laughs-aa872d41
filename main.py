@@ -22,6 +22,11 @@ def main() -> None:
     os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "w", encoding="utf-8") as f:
         f.write(line)
+    # Read-back verification: the file must hold exactly the joke, one line.
+    with open("/output/entry.txt", "r", encoding="utf-8") as f:
+        written = f.read()
+    if written != line:
+        raise ValueError("read-back mismatch")
 
 
 if __name__ == "__main__":
